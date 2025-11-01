@@ -1,72 +1,100 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useRef } from "react";
+import { gsap } from "gsap";
 import "./Home.scss";
 
-
-//img
+// images
 import spriteLogo from "../Home/img/sprite.png";
 import wakandaLogo from "../Home/img/wakanda.png";
 
-
 export default function Home() {
-  const [targetPos, setTargetPos] = useState({ x: 0, y: 0 });
-  const currentPos = useRef({ x: 0, y: 0 });
-  const [displayPos, setDisplayPos] = useState({ x: 0, y: 0 });
+  const bgRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    const bg = bgRef.current;
+    if (!bg) return;
+
+    let x = 0;
+    let y = 0;
+    let targetX = 0;
+    let targetY = 0;
+    const sensitivity = 10;
+
     const handleMouseMove = (e: MouseEvent) => {
       const { innerWidth, innerHeight } = window;
-      const x = (e.clientX - innerWidth / 4) / innerWidth;
-      const y = (e.clientY - innerHeight / 4) / innerHeight;
-      setTargetPos({ x, y });
+      targetX = ((e.clientX - innerWidth / 2) / innerWidth) * sensitivity;
+      targetY = ((e.clientY - innerHeight / 2) / innerHeight) * sensitivity;
     };
+
+    const update = () => {
+      // інерційний рух із плавним переходом
+      x += (targetX - x) * 0.08;
+      y += (targetY - y) * 0.08;
+
+      gsap.to(bg, {
+        x,
+        y,
+        duration: 0.8,
+        ease: "power3.out",
+      });
+
+      requestAnimationFrame(update);
+    };
+
     window.addEventListener("mousemove", handleMouseMove);
+    update();
 
-    const smoothMove = () => {
-      currentPos.current.x += (targetPos.x - currentPos.current.x) * 0.4;
-      currentPos.current.y += (targetPos.y - currentPos.current.y) * 0.4;
-
-      setDisplayPos({ ...currentPos.current });
-      requestAnimationFrame(smoothMove);
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove);
     };
-    smoothMove();
-
-    return () => window.removeEventListener("mousemove", handleMouseMove);
-  }, [targetPos]);
+  }, []);
 
   return (
     <div className="home">
-      <div
-        className="home-bg"
-        style={{
-          transform: `translate(${displayPos.x * 35}px, ${displayPos.y * 35}px) scale(1.07)`,
-        }}
-      ></div>
+      <div ref={bgRef} className="home-bg" />
 
       <div className="home-content">
+        <a href="https://www.youtube.com/playlist?list=PLDjMP4ry31tvJnmVnYLWRF3w99vWym5Uf"><button className="accessibility-btn" aria-label="Accessible version">
+          <span className="label">Accessible version</span>
+          <span className="arrow">››</span>
+        </button></a>
         <div className="logos">
           <img src={spriteLogo} alt="Sprite Zero Sugar" className="logo" />
           <span className="multiply">×</span>
           <img src={wakandaLogo} alt="Wakanda Forever" className="logo" />
         </div>
 
-        <h1 className="main-title">
+        <h1 className="title">
           <span className="subtitle">
             <span className="the">THE</span>
-            <span className="hall">HALL</span>
+            <span className="hall">
+              HALL
+              <span className="glyph-top">⟟⋏⋏⋔</span>
+            </span>
             <span className="of">OF</span>
           </span>
-          <span className="zero">ZERO LIMITS</span>
+          <span className="zero">
+            ZERO LIMITS
+            <span className="glyph-bottom">⟊⋏⟒⋉</span>
+          </span>
         </h1>
 
-        <p className="tagline">EXPLORE NEW PATHS. FIND YOUR GIFT.</p>
-
-        <button className="enter-btn">ENTER →</button>
-
-        <div className="footer">
-          <img src={spriteLogo} alt="Sprite" />
-          <img src={wakandaLogo} alt="Marvel" />
-          <p>Sprite Zero Sugar | © MARVEL</p>
+        <div className="tagline">
+          <p>EXPLORE NEW PATHS.</p>
+          <p>FIND YOUR GIFT.</p>
         </div>
+
+        <button className="enter-btn" aria-label="enter">
+          <span className="label">Enter</span>
+          <span className="arrow">››</span>
+        </button>
+
+        <table className="footer">
+          <tr>
+            <td><img src={spriteLogo} alt="Sprite" /></td>
+            <td><img src={wakandaLogo} alt="Marvel" /></td>
+            <td><p>Sprite Zero Sugar | © MARVEL</p></td>
+          </tr>
+        </table>
       </div>
     </div>
   );
