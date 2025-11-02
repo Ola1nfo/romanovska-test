@@ -10,12 +10,15 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@react-three/drei": "^10.7.6",
+    "@react-three/fiber": "^9.4.0",
     "bootstrap-icons": "^1.13.1",
     "gsap": "^3.13.0",
     "react": "^19.2.0",
     "react-dom": "^19.1.1",
     "react-router-dom": "^7.9.5",
-    "scss": "^0.2.4"
+    "scss": "^0.2.4",
+    "three": "^0.181.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.36.0",
