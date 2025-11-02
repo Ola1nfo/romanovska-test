@@ -1,5 +1,6 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
+import WisdomGuide from "../../components/WisdomGuide/WisdomGuide";
 import "./Main.scss";
 
 // img
@@ -9,31 +10,43 @@ import wakandaLogo from "../Main/img/wakanda.png";
 
 export default function Main() {
   const bgRef = useRef<HTMLDivElement>(null);
+  const [showGuide, setShowGuide] = useState(false); 
 
   useEffect(() => {
-    const scale = 1.3; // має збігатися з CSS cameraZoom
+    const scale = 1.3;
+    const bg = bgRef.current;
+    if (!bg) return;
 
     const handleMouseMove = (event: MouseEvent) => {
-      if (!bgRef.current) return;
+    if (!bgRef.current) return;
 
-      // обчислюємо максимально можливий зсув, щоб бачити краї
-      const xRange = (bgRef.current.offsetWidth * (scale - 1)) / 2;
-      const yRange = (bgRef.current.offsetHeight * (scale - 1)) / 2;
+    const relX = (event.clientX / window.innerWidth - 0.5);
+    const relY = (event.clientY / window.innerHeight - 0.5);
+    const multiplier = 60; 
+    const x = -relX * multiplier;
+    const y = -relY * multiplier;
 
-      // рух протилежний до мишки для ефекту камери
-      const x = -(event.clientX / window.innerWidth - 0.5) * 2 * xRange;
-      const y = -(event.clientY / window.innerHeight - 0.5) * 2 * yRange;
-
-      gsap.to(bgRef.current, {
-        x: x,
-        y: y,
-        duration: 1,
+    gsap.to(bgRef.current, {
+        x,
+        y,
+        duration: 1.2,
         ease: "power3.out",
-      });
+    });
     };
 
-    window.addEventListener("mousemove", handleMouseMove);
-    return () => window.removeEventListener("mousemove", handleMouseMove);
+    const wrapper = bg.parentElement;
+    const onAnimationEnd = () => {
+      window.addEventListener("mousemove", handleMouseMove);
+      setShowGuide(true); 
+      wrapper?.removeEventListener("animationend", onAnimationEnd);
+    };
+
+    wrapper?.addEventListener("animationend", onAnimationEnd);
+
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove);
+      wrapper?.removeEventListener("animationend", onAnimationEnd);
+    };
   }, []);
 
   return (
@@ -46,6 +59,15 @@ export default function Main() {
         />
       </div>
 
+      <h1 className="title">
+        <span className="subtitle">
+          <span className="the-text">THE</span>
+          <span className="hall-text">HALL </span>
+          <span className="of-text">OF</span>
+        </span>
+        <span className="main-text">ZERO LIMITS</span>
+      </h1>
+
       <table className="footer">
         <tbody>
           <tr>
@@ -55,6 +77,8 @@ export default function Main() {
           </tr>
         </tbody>
       </table>
+
+      {showGuide && <WisdomGuide />}
     </div>
   );
 }

@@ -90,13 +90,14 @@ export default function Home() {
         </div>
       )}
 
-      <table className="footer"> 
-        <tbody> 
-          <tr> 
-            <td><img src={spriteLogo} alt="Sprite" /></td> <td><img src={wakandaLogo} alt="Marvel" /></td> 
-            <td><p>Sprite Zero Sugar | © MARVEL</p></td> 
-          </tr> 
-        </tbody> 
+      <table className="footer">
+        <tbody>
+          <tr>
+            <td><img src={spriteLogo} alt="Sprite" /></td>
+            <td><img src={wakandaLogo} alt="Marvel" /></td>
+            <td><p>Sprite Zero Sugar | © MARVEL</p></td>
+          </tr>
+        </tbody>
       </table>
 
       {videoStarted && (
@@ -108,17 +109,24 @@ export default function Home() {
             muted
             onEnded={() => setFlash(true)}
           />
-          <table className="footer"> 
-            <tbody> 
-              <tr> 
-                <td><img src={spriteLogo} alt="Sprite" /></td> <td><img src={wakandaLogo} alt="Marvel" /></td> 
-                <td><p>Sprite Zero Sugar | © MARVEL</p></td> 
-              </tr> 
-            </tbody> 
+          <h1 className="title-video">
+            <span className="subtitle-video">
+                <span className='the-text-video'>THE</span>
+                <span className='hall-text-video'>HALL </span>
+                <span className='of-text-video'>OF</span>
+            </span>
+            <span className="main-text-video">ZERO LIMITS</span>
+          </h1>
+          <table className="footer">
+            <tbody>
+              <tr>
+                <td><img src={spriteLogo} alt="Sprite" /></td>
+                <td><img src={wakandaLogo} alt="Marvel" /></td>
+                <td><p>Sprite Zero Sugar | © MARVEL</p></td>
+              </tr>
+            </tbody>
           </table>
         </>
-
-        
       )}
 
       {flash && <div className="flash-screen"></div>}
