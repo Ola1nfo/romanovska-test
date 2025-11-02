@@ -85,7 +85,7 @@ export default function Home() {
 
           <button className="enter-btn" aria-label="enter" onClick={handleEnter}>
             <span className="label">Enter</span>
-            <span className="arrow">››</span>
+            <span className="arrow">↠</span>
           </button>
         </div>
       )}

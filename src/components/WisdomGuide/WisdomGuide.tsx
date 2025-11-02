@@ -33,14 +33,12 @@ export default function WisdomGuide() {
             <div className="wisdom-content">
                 <p>
                 You have entered the{" "}
-                <span className="highlight">Hall of Zero Limits.</span>
-                <br />
-                Great things lie ahead for all who open themselves to finding their gift.
+                <span className="highlight">Hall of Zero Limits.</span> Great things lie ahead for all who open themselves to finding their gift.
                 </p>
 
                 <div className="wisdom-buttons">
-                    <button className="arrow-btn left">←</button>
-                    <button className="arrow-btn right">→</button>
+                    <button className="arrow-btn left">↞</button>
+                    <button className="arrow-btn right">↠</button>
                 </div>
             </div>
 
