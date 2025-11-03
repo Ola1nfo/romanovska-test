@@ -1,0 +1,126 @@
+.tutorial-panel {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 650px;
+    height: 400px;
+    background: rgba(0, 20, 10, 0.6);
+    clip-path: polygon(
+        12% 0%,
+        88% 0%,
+        100% 12%,
+        100% 88%,
+        88% 100%,
+        12% 100%,
+        0% 88%,
+        0% 12%
+    );
+    border: 2px solid #00ffcc;
+    box-shadow:
+        0 0 15px #00ffcc,
+        inset 0 0 15px rgba(0, 255, 204, 0.3);
+    backdrop-filter: blur(8px);
+    color: #eafff9;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.5s ease;
+    z-index: 200;
+
+    .panel-glow {
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(
+            circle at center,
+            rgba(0, 255, 180, 0.3) 0%,
+            rgba(0, 255, 180, 0.1) 30%,
+            transparent 70%
+        );
+        filter: blur(15px);
+        pointer-events: none;
+        z-index: 1;
+    }
+
+    .panel-content {
+        position: relative;
+        z-index: 5;
+        text-align: center;
+        width: 90%;
+    }
+
+    .panel-title {
+        font-size: 30px;
+        letter-spacing: 3px;
+        margin-bottom: 35px;
+        color: #00ffc8;
+        text-shadow: 0 0 15px #00ffc8;
+    }
+
+    .panel-items {
+        display: flex;
+        justify-content: center;
+        gap: 50px;
+        margin-bottom: 40px;
+
+        .item {
+            width: 150px;
+            text-align: center;
+
+            .icon {
+                width: 80px;
+                height: 80px;
+                margin: 0 auto 10px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: #00ffc8;
+                font-size: 28px;
+                border: 2px solid #00ffc8;
+                clip-path: polygon(
+                    25% 0%,
+                    75% 0%,
+                    100% 25%,
+                    100% 75%,
+                    75% 100%,
+                    25% 100%,
+                    0% 75%,
+                    0% 25%
+                );
+                box-shadow: 0 0 15px #00ffc8;
+                transition: all 0.3s ease;
+            }
+
+            .icon:hover {
+                background: #00ffc8;
+                color: #00261f;
+                box-shadow: 0 0 25px #00ffc8;
+            }
+
+            p {
+                font-size: 14px;
+                opacity: 0.8;
+                line-height: 1.3;
+            }
+        }
+    }
+
+    .start-btn {
+        background: transparent;
+        border: 1px solid #00ffc8;
+        color: #00ffc8;
+        padding: 12px 36px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: 600;
+        letter-spacing: 1px;
+        transition: all 0.3s ease;
+
+        &:hover {
+            background: #00ffc8;
+            color: #00140d;
+            box-shadow: 0 0 25px #00ffc8;
+        }
+    }
+}

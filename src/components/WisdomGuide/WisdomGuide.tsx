@@ -2,11 +2,13 @@ import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import "./WisdomGuide.scss";
 import arrow from "./img/arrow.png";
+import TutorialPanel from "../TutorialPanel/TutorialPanel"; 
 
 export default function WisdomGuide() {
     const guideRef = useRef<HTMLDivElement>(null);
     const textContainer = useRef<HTMLDivElement>(null);
     const [index, setIndex] = useState(0);
+    const [showTutorial, setShowTutorial] = useState(false);
 
     const messages = [
         "You have entered the Hall of Zero Limits. Great things lie ahead for all who open themselves to finding their gift.",
@@ -42,31 +44,43 @@ export default function WisdomGuide() {
         );
     }, [index]);
 
-    const next = () => setIndex((prev) => (prev + 1) % messages.length);
-    const prev = () => setIndex((prev) => (prev - 1 + messages.length) % messages.length);
+    const next = () => {
+        if (index < messages.length - 1) {
+            setIndex(index + 1);
+        } else {
+            const tl = gsap.timeline({
+                onComplete: () => setShowTutorial(true),
+            });
+
+            tl.to(guideRef.current, {
+                opacity: 0,
+                y: -60,
+                duration: 0.8,
+                ease: "power2.inOut",
+            });
+        }
+    };
+
+    const prev = () => {
+        if (index > 0) setIndex(index - 1);
+    };
 
     const renderMessage = (msg: string) =>
         msg.split(" ").map((word, i) => {
             const isHighlight =
-                word.includes("Hall") ||
-                word.includes("of") ||
-                word.includes("Zero") ||
-                word.includes("Limits.") ||
-                word.includes("creativity") ||
-                word.includes("and") ||
-                word.includes("growth") ||
-                word.includes("new") ||
-                word.includes("insights") ||
-                word.includes("tools");
+                ["Hall", "Zero", "Limits", "creativity", "growth", "insights", "tools"].some((w) =>
+                    word.includes(w)
+                );
             return (
-                <span
-                    key={i}
-                    className={`word ${isHighlight ? "highlight" : ""}`}
-                >
+                <span key={i} className={`word ${isHighlight ? "highlight" : ""}`}>
                     {word}&nbsp;
                 </span>
             );
         });
+
+    if (showTutorial) {
+        return <TutorialPanel />; 
+    }
 
     return (
         <div className="wisdom-guide" ref={guideRef}>
