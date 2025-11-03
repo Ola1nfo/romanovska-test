@@ -56,7 +56,7 @@
         }
     }
 
-    .title {
+    .title-load {
         color: #ffffff;
         font-size: 40px;
         letter-spacing: 2px;
@@ -69,7 +69,7 @@
         transform: translateY(120px);
         animation: riseUp 1.5s 0.5s ease-out forwards; 
 
-        .subtitle {
+        .subtitle-load {
             display: flex;
             align-items: flex-start;
             justify-content: center;
@@ -77,24 +77,24 @@
             color: #fff;
             filter: drop-shadow(0 0 2px #00ff80);
 
-            .the-text {
+            .the-text-load {
                 font-size: 25px;
                 position: relative;
                 top: 5px;
             }
 
-            .hall-text {
+            .hall-text-load {
                 font-size: 50px;
             }
 
-            .of-text {
+            .of-text-load {
                 font-size: 25px;
                 position: relative;
                 top: 25px;
             }
         }
 
-        .main-text {
+        .main-text-load {
             display: block;
             font-size: 50px;
             color: #fff;

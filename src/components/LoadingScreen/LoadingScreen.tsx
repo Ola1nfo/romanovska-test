@@ -47,9 +47,9 @@ export default function LoadingScreen() {
                 />
                 </div>
 
-                <h1 className="title">
-                    <span className="subtitle"><span className='the-text'>THE</span> <span className='hall-text'>HALL </span> <span className='of-text'>OF</span></span>
-                    <span className="main-text">ZERO LIMITS</span>
+                <h1 className="title-load">
+                    <span className="subtitle-load"><span className='the-text-load'>THE</span> <span className='hall-text-load'>HALL </span> <span className='of-text-load'>OF</span></span>
+                    <span className="main-text-load">ZERO LIMITS</span>
                 </h1>
 
                 <div className="progress-bar">

@@ -3,6 +3,9 @@ import { gsap } from "gsap";
 import WisdomGuide from "../../components/WisdomGuide/WisdomGuide";
 import NeonTitle from "../../components/NeonTitle/NeonTitle";
 import TutorialPanel from "../../components/TutorialPanel/TutorialPanel";
+import MenuButton from "../../components/MenuButton/MenuButton";
+import MouseFollower from "../../components/MouseFollower/MouseFollower";
+import MenuOverlay from "../../components/MenuButton/MenuOverlay/MenuOverlay";
 import "./Main.scss";
 
 // img
@@ -13,7 +16,9 @@ import wakandaLogo from "../Main/img/wakanda.png";
 export default function Main() {
   const bgRef = useRef<HTMLDivElement>(null);
   const [showGuide, setShowGuide] = useState(false);
-  const [showTutorial, setShowTutorial] = useState(false); // 👈 додаємо tutorial
+  const [showTutorial, setShowTutorial] = useState(false);
+  const [showNeonTitle, setShowNeonTitle] = useState(false);
+  const [showMenu, setShowMenu] = useState(false);
 
   useEffect(() => {
     const bg = bgRef.current;
@@ -51,10 +56,14 @@ export default function Main() {
     };
   }, []);
 
-  // 👇 Коли закінчується гід — показуємо tutorial
   const handleGuideFinish = () => {
     setShowGuide(false);
-    setTimeout(() => setShowTutorial(true), 800); // невелика пауза після зникнення
+    setTimeout(() => setShowTutorial(true), 800);
+  };
+
+  const handleTutorialFinish = () => {
+    setShowTutorial(false);
+    setTimeout(() => setShowNeonTitle(true), 500);
   };
 
   return (
@@ -89,15 +98,23 @@ export default function Main() {
       {showGuide && (
         <>
           <div className="screen-dim"></div>
-          <WisdomGuide onFinish={() => {
-            setShowGuide(false);
-            setTimeout(() => setShowTutorial(true), 800);
-          }} />
+          <WisdomGuide onFinish={handleGuideFinish} />
           <NeonTitle active={showGuide} />
         </>
       )}
 
-      {showTutorial && <TutorialPanel />}
+      {showTutorial && <TutorialPanel onFinish={handleTutorialFinish} />}
+
+      {showNeonTitle && (
+        <>
+          <NeonTitle active={showNeonTitle} />
+          {!showMenu && <MenuButton onClick={() => setShowMenu(true)} />}
+          {!showMenu && <MouseFollower />} 
+        </>
+      )}
+
+      {showMenu && <MenuOverlay onClose={() => setShowMenu(false)} />}
+
     </div>
   );
 }
