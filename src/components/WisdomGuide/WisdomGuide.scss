@@ -159,77 +159,77 @@
         }
 
         .arrow-buttons {
-    position: absolute;
-    bottom: 5%;
-    left: 70%;
-    transform: translateX(-50%);
-    display: flex;
-    gap: 25px;
-    justify-content: center;
-    align-items: center;
-    z-index: 50;
-}
-
-.arrow-wrapper {
-    position: relative;
-    width: 65px;
-    height: 65px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: all 0.3s ease;
-
-    .arrow-bg {
-        width: 100%;
-        height: 100%;
-        object-fit: contain;
-        filter: brightness(0) invert(1)
-            drop-shadow(0 0 8px rgba(0, 255, 180, 0.7));
-        transition: all 0.3s ease;
-    }
-
-    .arrow-symbol {
-        position: absolute;
-        font-size: 26px;
-        color: #00ffcc;
-        text-shadow: 0 0 6px #00ffcc;
-        pointer-events: none;
-        transition: all 0.3s ease;
-    }
-
-    &.left {
-        transform: rotate(20deg);
-
-        .arrow-symbol {
-            transform: rotate(160deg);
+            position: absolute;
+            bottom: 5%;
+            left: 70%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 25px;
+            justify-content: center;
+            align-items: center;
+            z-index: 50;
         }
-    }
 
-    &.right {
-        transform: rotate(20deg);
+        .arrow-wrapper {
+            position: relative;
+            width: 65px;
+            height: 65px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
 
-        .arrow-symbol {
-            transform: rotate(160deg);
+            .arrow-bg {
+                width: 100%;
+                height: 100%;
+                object-fit: contain;
+                filter: brightness(0) invert(1)
+                    drop-shadow(0 0 8px rgba(0, 255, 180, 0.7));
+                transition: all 0.3s ease;
+            }
+
+            .arrow-symbol {
+                position: absolute;
+                font-size: 26px;
+                color: #00ffcc;
+                text-shadow: 0 0 6px #00ffcc;
+                pointer-events: none;
+                transition: all 0.3s ease;
+            }
+
+            &.left {
+                transform: rotate(20deg);
+
+                .arrow-symbol {
+                    transform: rotate(160deg);
+                }
+            }
+
+            &.right {
+                transform: rotate(20deg);
+
+                .arrow-symbol {
+                    transform: rotate(160deg);
+                }
+            }
+
+            &:hover .arrow-bg {
+                filter: brightness(1) invert(1)
+                        drop-shadow(0 0 10px rgba(255, 255, 255, 1))
+                        drop-shadow(0 0 18px rgba(0, 255, 100, 0.9))
+                        saturate(200%) hue-rotate(90deg);
+            }
+
+            &:active {
+                transform: scale(0.95) rotate(20deg);
+
+                .arrow-bg {
+                    filter: brightness(1.2) invert(1)
+                        drop-shadow(0 0 6px rgba(0, 255, 160, 0.8));
+                }
+            }
         }
-    }
-
-    &:hover .arrow-bg {
-        filter: brightness(1) invert(1)
-                drop-shadow(0 0 10px rgba(255, 255, 255, 1))
-                drop-shadow(0 0 18px rgba(0, 255, 100, 0.9))
-                saturate(200%) hue-rotate(90deg);
-    }
-
-    &:active {
-        transform: scale(0.95) rotate(20deg);
-
-        .arrow-bg {
-            filter: brightness(1.2) invert(1)
-                drop-shadow(0 0 6px rgba(0, 255, 160, 0.8));
-        }
-    }
-}
 
     }
 

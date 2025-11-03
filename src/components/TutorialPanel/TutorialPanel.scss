@@ -1,126 +1,176 @@
-.tutorial-panel {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 650px;
-    height: 400px;
-    background: rgba(0, 20, 10, 0.6);
-    clip-path: polygon(
-        12% 0%,
-        88% 0%,
-        100% 12%,
-        100% 88%,
-        88% 100%,
-        12% 100%,
-        0% 88%,
-        0% 12%
-    );
-    border: 2px solid #00ffcc;
-    box-shadow:
-        0 0 15px #00ffcc,
-        inset 0 0 15px rgba(0, 255, 204, 0.3);
-    backdrop-filter: blur(8px);
-    color: #eafff9;
-    overflow: hidden;
+.tutorial-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.3);
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: all 0.5s ease;
     z-index: 200;
 
-    .panel-glow {
+    .panel-title {
         position: absolute;
-        inset: 0;
-        background: radial-gradient(
-            circle at center,
-            rgba(0, 255, 180, 0.3) 0%,
-            rgba(0, 255, 180, 0.1) 30%,
-            transparent 70%
-        );
-        filter: blur(15px);
-        pointer-events: none;
+        top: 40px;
+        text-align: center;
+        width: 100%;
+        font-family: "Cinzel", serif;
+        letter-spacing: 3px;
+
+        .panel-symbols {
+            display: block;
+            font-size: 18px;
+            color: #00c123;
+            letter-spacing: 6px;
+            margin-bottom: 6px;
+            font-family: "Orbitron", sans-serif;
+        }
+
+        .panel-text {
+            display: block;
+            font-size: 36px;
+            color: #fff;
+            letter-spacing: 4px;
+            text-shadow:
+            0 0 3px #00ffc8;
+        }
+    }
+
+}
+
+.tutorial-panel {
+    position: relative;
+    width: 900px;
+    height: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    border-radius: 16px;
+    box-shadow: 0 0 30px rgba(0, 255, 200, 0.15);
+}
+
+.sci-frame {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.frame-outline {
+    animation: pulseGlow 2s infinite alternate;
+}
+
+.frame-line {
+    stroke: #00ffcc;
+    stroke-width: 3;
+    opacity: 0.8;
+    filter: drop-shadow(0 0 10px #00ffcc);
+}
+
+@keyframes pulseGlow {
+    from {
+        stroke-opacity: 0.7;
+        filter: drop-shadow(0 0 8px #00ffcc);
+    }
+    to {
+        stroke-opacity: 1;
+        filter: drop-shadow(0 0 18px #00ffcc);
+    }
+}
+
+.panel-content {
+    position: relative;
+    z-index: 2;
+    width: 80%;
+    text-align: center;
+    color: #d8fff0;
+}
+
+.panel-items {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 60px;
+    margin-bottom: 60px;
+
+    .item {
+        width: 180px;
+        display: flex;
+        flex-direction: column;
+        align-items: center; 
+        text-align: center;
+
+        .icon {
+            width: 110px;
+            height: 90px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            color: #00761e;
+
+            clip-path: polygon(
+                25% 0%,
+                75% 0%,
+                100% 50%,
+                75% 100%,
+                25% 100%,
+                0% 50%
+            );
+
+            background: radial-gradient(circle at center, #00ff33cf 0%, #00cc3394 60%, #003300 100%);
+        }
+
+        p {
+            margin-top: 35px; 
+            font-size: 14px;
+            line-height: 1.4;
+            text-align: center;
+            color: #ffffff;
+            text-shadow:
+            0 0 3px #00ff11;
+        }
+    }
+}
+
+
+.start-btn {
+    position: absolute;
+    top: 220px;
+    right: 250px;
+    z-index: 60;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 20px;
+    background: rgba(0,0,0,0.45);
+    color: #fff;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 12px;
+
+    &::before {
+        content: "";
+        position: absolute;
+        inset: -8px;
+        border-radius: 16px;
+        border: 1.2px solid rgba(160,255,170,0.68);
         z-index: 1;
     }
 
-    .panel-content {
-        position: relative;
-        z-index: 5;
-        text-align: center;
-        width: 90%;
-    }
+    &::after {
+        content: "";
+        position: absolute;
+        inset: 4px;
+        border-radius: 10px;
+        border: 0.6px solid rgba(255,255,255,0.35);
+        z-index: 2;
+    }    
 
-    .panel-title {
-        font-size: 30px;
-        letter-spacing: 3px;
-        margin-bottom: 35px;
-        color: #00ffc8;
-        text-shadow: 0 0 15px #00ffc8;
-    }
-
-    .panel-items {
-        display: flex;
-        justify-content: center;
-        gap: 50px;
-        margin-bottom: 40px;
-
-        .item {
-            width: 150px;
-            text-align: center;
-
-            .icon {
-                width: 80px;
-                height: 80px;
-                margin: 0 auto 10px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                color: #00ffc8;
-                font-size: 28px;
-                border: 2px solid #00ffc8;
-                clip-path: polygon(
-                    25% 0%,
-                    75% 0%,
-                    100% 25%,
-                    100% 75%,
-                    75% 100%,
-                    25% 100%,
-                    0% 75%,
-                    0% 25%
-                );
-                box-shadow: 0 0 15px #00ffc8;
-                transition: all 0.3s ease;
-            }
-
-            .icon:hover {
-                background: #00ffc8;
-                color: #00261f;
-                box-shadow: 0 0 25px #00ffc8;
-            }
-
-            p {
-                font-size: 14px;
-                opacity: 0.8;
-                line-height: 1.3;
-            }
-        }
-    }
-
-    .start-btn {
-        background: transparent;
-        border: 1px solid #00ffc8;
-        color: #00ffc8;
-        padding: 12px 36px;
-        border-radius: 8px;
-        cursor: pointer;
-        font-weight: 600;
-        letter-spacing: 1px;
-        transition: all 0.3s ease;
-
-        &:hover {
-            background: #00ffc8;
-            color: #00140d;
-            box-shadow: 0 0 25px #00ffc8;
-        }
+    &:hover {
+        background: #00ff8053;
+        color: #000;
+        transform: scale(1.06);
     }
 }

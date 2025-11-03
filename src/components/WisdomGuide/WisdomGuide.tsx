@@ -2,13 +2,11 @@ import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import "./WisdomGuide.scss";
 import arrow from "./img/arrow.png";
-import TutorialPanel from "../TutorialPanel/TutorialPanel"; 
 
-export default function WisdomGuide() {
+export default function WisdomGuide({ onFinish }: { onFinish: () => void }) {
     const guideRef = useRef<HTMLDivElement>(null);
     const textContainer = useRef<HTMLDivElement>(null);
     const [index, setIndex] = useState(0);
-    const [showTutorial, setShowTutorial] = useState(false);
 
     const messages = [
         "You have entered the Hall of Zero Limits. Great things lie ahead for all who open themselves to finding their gift.",
@@ -49,7 +47,7 @@ export default function WisdomGuide() {
             setIndex(index + 1);
         } else {
             const tl = gsap.timeline({
-                onComplete: () => setShowTutorial(true),
+                onComplete: () => onFinish && onFinish(),
             });
 
             tl.to(guideRef.current, {
@@ -57,7 +55,7 @@ export default function WisdomGuide() {
                 y: -60,
                 duration: 0.8,
                 ease: "power2.inOut",
-            });
+            }, 0);
         }
     };
 
@@ -68,7 +66,7 @@ export default function WisdomGuide() {
     const renderMessage = (msg: string) =>
         msg.split(" ").map((word, i) => {
             const isHighlight =
-                ["Hall", "Zero", "Limits", "creativity", "growth", "insights", "tools"].some((w) =>
+                ["Hall", "of", "Zero", "Limits", "creativity", "and", "growth", "insights", "new", "tools"].some((w) =>
                     word.includes(w)
                 );
             return (
@@ -77,10 +75,6 @@ export default function WisdomGuide() {
                 </span>
             );
         });
-
-    if (showTutorial) {
-        return <TutorialPanel />; 
-    }
 
     return (
         <div className="wisdom-guide" ref={guideRef}>
