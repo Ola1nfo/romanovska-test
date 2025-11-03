@@ -1,0 +1,66 @@
+.neon-title {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    color: #ffffff;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+    z-index: 50;
+    font-family: "Cinzel", serif;
+
+    &.visible {
+        opacity: 1;
+    }
+
+    .main-title {
+        font-size: 28px;
+        letter-spacing: 3px;
+        color: #ffffff;
+        text-shadow:
+        0 0 8px rgba(0, 255, 120, 0.6);
+        margin-bottom: 20px;
+        position: relative;
+
+        .diamond {
+            position: absolute;
+            display: inline-block;
+            width: 3px;
+            height: 3px;
+            background: transparent;
+            border: 2px solid rgba(0, 255, 120, 0.6);
+            transform: rotate(45deg);
+            box-shadow:
+                0 0 8px #00ff80,
+                0 0 12px rgba(0, 255, 120, 0.6),
+                0 0 20px rgba(0, 255, 100, 0.4);
+
+            &.left {
+                top: 25px;
+                right: 250px;
+            }
+            &.right {
+                top: 25px;
+                left: 250px;
+            }
+        }
+    }
+
+    .subtitle {
+        position: absolute;
+        bottom: 0px;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 12px;
+        letter-spacing: 4px;
+        color: #ffffff;
+        text-shadow:
+        0 0 8px #00ffcc,
+        0 0 16px rgba(0, 255, 180, 0.8);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+    }
+}

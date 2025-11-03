@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import WisdomGuide from "../../components/WisdomGuide/WisdomGuide";
+import NeonTitle from "../../components/NeonTitle/NeonTitle";
 import "./Main.scss";
 
 // img
@@ -13,7 +14,6 @@ export default function Main() {
   const [showGuide, setShowGuide] = useState(false); 
 
   useEffect(() => {
-    const scale = 1.3;
     const bg = bgRef.current;
     if (!bg) return;
 
@@ -51,34 +51,41 @@ export default function Main() {
 
   return (
     <div className="main-page">
-      <div className="hall-bg-wrapper">
-        <div
-          className="hall-bg"
-          ref={bgRef}
-          style={{ backgroundImage: `url(${hallBg})` }}
-        />
-      </div>
+        <div className="hall-bg-wrapper">
+            <div
+            className="hall-bg"
+            ref={bgRef}
+            style={{ backgroundImage: `url(${hallBg})` }}
+            />
+        </div>
 
-      <h1 className="title">
-        <span className="subtitle">
-          <span className="the-text">THE</span>
-          <span className="hall-text">HALL </span>
-          <span className="of-text">OF</span>
-        </span>
-        <span className="main-text">ZERO LIMITS</span>
-      </h1>
+        <h1 className="title">
+            <span className="subtitle">
+            <span className="the-text">THE</span>
+            <span className="hall-text">HALL </span>
+            <span className="of-text">OF</span>
+            </span>
+            <span className="main-text">ZERO LIMITS</span>
+        </h1>
 
-      <table className="footer">
-        <tbody>
-          <tr>
-            <td><img src={spriteLogo} alt="Sprite" /></td>
-            <td><img src={wakandaLogo} alt="Marvel" /></td>
-            <td><p>Sprite Zero Sugar | © MARVEL</p></td>
-          </tr>
-        </tbody>
-      </table>
+        <table className="footer">
+            <tbody>
+            <tr>
+                <td><img src={spriteLogo} alt="Sprite" /></td>
+                <td><img src={wakandaLogo} alt="Marvel" /></td>
+                <td><p>Sprite Zero Sugar | © MARVEL</p></td>
+            </tr>
+            </tbody>
+        </table>
 
-      {showGuide && <WisdomGuide />}
+        {showGuide && (
+            <>
+                <div className="screen-dim"></div>
+                <WisdomGuide />
+                <NeonTitle />
+            </>
+        )}
+
     </div>
   );
 }
